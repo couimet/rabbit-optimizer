@@ -127,6 +127,12 @@ describe('parseConfig', () => {
 
     expect(result.value.SCHEDULER_TICK_INTERVAL_SEC).toBe(10);
   });
+
+  it('reads SCHEDULER_MAX_PR_STATE_FETCHES_PER_TICK from the environment', () => {
+    const result = parseConfig(env(BASE, { SCHEDULER_MAX_PR_STATE_FETCHES_PER_TICK: '3' }));
+
+    expect(result.value.SCHEDULER_MAX_PR_STATE_FETCHES_PER_TICK).toBe(3);
+  });
   it('applies default DATABASE_URL when absent', () => {
     const { DATABASE_URL: _, ...rest } = BASE;
     const result = parseConfig(rest);
